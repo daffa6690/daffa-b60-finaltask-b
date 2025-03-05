@@ -1,0 +1,36 @@
+{{#> layout title='Blog Detail' user=user }}
+<main>
+  <section class="blog-container" style="color: white;">
+    <div class="blog-list-detail">
+      <h1 class="h1">{{data.title}}</h1>
+      <p>{{formatDateToWIB data.createdAt}} oleh {{data.user.username}}</p>
+          <p>
+              {{#if node}}
+                <i class="fa-brands fa-node-js fa-xl" style="color: #ffffff;padding-right:3%;padding-top:2%;"></i>
+              {{/if}}
+
+              {{#if react}}
+                <i class="fa-brands fa-react fa-xl" style="color: #ffffff;padding-right:3%;padding-top:2%;"></i>
+              {{/if}}
+
+              {{#if next}}
+                <i class="fa-solid fa-forward fa-xl" style="color: #ffffff;padding-right:3%;padding-top:2%;"></i>
+              {{/if}}
+
+              {{#if typescript}}
+                <i class="fa-solid fa-cannabis fa-xl" style="color: #ffffff;padding-right:3%;padding-top:2%;"></i>
+              {{/if}}
+              
+          </p>
+      
+      <div class="blog-detail-content" style="color:black;background-color: rgba(0, 0, 0, 0.39);">
+        <img src="{{data.image}}" class="blog-detail-image" alt="">
+        <p style="padding-top: 2%;padding-right:3%;text-align:justify;">{{data.content}}</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+{{!--<script src="assets/js/blog.js"></script> --}}
+
+{{/layout}}

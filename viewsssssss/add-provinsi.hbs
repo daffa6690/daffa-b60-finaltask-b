@@ -1,0 +1,42 @@
+{{#> layout title='Add Blog' user=user }}
+<main>
+  <section class="blog-form">
+    <form action="/app" method="post"  enctype="multipart/form-data" class="form-container">
+      <h1 class="section-title" style="color:rgb(0, 0, 0);">Tambah Provinsi</h1>
+
+      <div class="addblog-form">
+        <div class="form-field">
+          <label for="nama" class="form-label">Nama</label>
+          <input id="nama" name="nama" class="form-input" type="text" placeholder="nama provinsi" required />
+        </div>
+
+        
+          <div class="form-field">
+            <label for="diresmikan" class="form-label">Diresmikan</label>
+            <input id="diresmikan" name="diresmikan" class="form-input" type="date" required />
+          </div>
+
+        <div class="form-field">
+          <label for="image" class="form-label">Photo</label>
+          <img src="{{data.image}}" id="preview" style="width:40%;" class="d-none">
+              <div class="form-input">
+                <input id="image" style="font-size:smaller; width:100%;" name="image"  type="file" placeholder="title"  />
+              </div>
+        </div>
+
+        <div class="form-field">
+          <label for="pulau" class="form-label">Pulau</label>
+          <input id="pulau" name="pulau" class="form-input" type="text" placeholder="nama provinsi" required />
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Post Blog</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<script src="/assets/js/image-preview.js"></script>
+
+{{/layout}}

@@ -1,0 +1,91 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Provinsi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+
+    <div class="container mt-5">
+
+      <!-- Pesan Flash -->
+      {{#if messages.error}}
+        <div class="alert alert-danger">{{messages.error}}</div>
+      {{/if}}
+
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Detail Provinsi: {{provinsi.nama}}</h2>
+
+        {{#if user}}
+          <p>Welcome, {{user.username}}!</p>
+          <a href="/logout" class="btn btn-danger">Logout</a>
+          <a href="/create-provinsi" class="btn btn-primary">Add Provinsi</a>
+          <a href="/create-kabupaten" class="btn btn-success">Add Kabupaten</a>
+        {{else}}
+          <a href="/login" class="btn btn-primary">Login</a>
+        {{/if}}
+        <a href="/" class="btn btn-secondary">Kembali</a>
+      </div>
+
+      <!-- Informasi Provinsi -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <img
+            src="/{{provinsi.photo}}"
+            alt=""
+            style="width: 70%; height:500px; object-fit:cover; margin:auto;"
+          />
+          <h5 class="card-title">Provinsi : {{provinsi.nama}}</h5>
+          <p>author :{{provinsi.user.username}}</p>
+          <p class="card-text"><strong>Diresmikan:</strong>
+            {{formateDate provinsi.diresmikan}}</p>
+          <i>editedAt : {{formateDate provinsi.updatedAt}}</i>
+        </div>
+      </div>
+
+      <!-- Daftar Kabupaten -->
+      <h3 class="mb-3">Daftar Kabupaten</h3>
+
+      {{#if provinsi.kabupaten.length}}
+        <div class="row">
+          {{#each provinsi.kabupaten}}
+            <div class="col-md-4">
+              <div class="card mb-3">
+
+                <img
+                  src="/{{this.photo}}"
+                  class="card-img-top img-fluid"
+                  alt="{{this.photo}}"
+                  style="height: 200px; object-fit:cover"
+                />
+
+                <div class="card-body">
+                  <h5 class="card-title">Kabupaten : {{this.nama}}</h5>
+                  <p class="card-text"><strong>Diresmikan:</strong>
+                    {{formateDate this.diresmikan}}</p>
+                  <i>editedAt : {{formateDate this.updatedAt}}</i>
+                  <br><br>
+                  {{#if (equal ../user.id ../provinsi.user_id)}}
+                    <a href="/edit-kabupaten/{{this.id}}" class="btn btn-success">Edit</a>
+                    <form action="/delete-kabupaten/{{this.id}}?_method=DELETE" method="post" style="display:inline;">
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                 {{/if}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="text-muted">Belum ada kabupaten dalam provinsi ini.</p>
+      {{/if}}
+
+    </div>
+
+  </body>
+</html>

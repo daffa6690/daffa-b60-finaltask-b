@@ -1,0 +1,61 @@
+{{#> layout title='Add Blog' user=user }}
+<main>
+  <section class="blog-form">
+    <form action="/app" method="post"  enctype="multipart/form-data" class="form-container">
+      <h1 class="section-title" style="color:white;">Add My Project</h1>
+
+      <div class="addblog-form">
+        <div class="form-field">
+          <label for="title" class="form-label">Project Name</label>
+          <input id="title" name="title" class="form-input" type="text" placeholder="enter title here..." required />
+        </div>
+
+        <div class="form-date">
+          <div class="form-field">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input id="startDate" name="startDate" class="form-input" type="date" required />
+          </div>
+
+          <div class="form-field">
+            <label for="endDate" class="form-label">End Date</label>
+            <input id="endDate" name="endDate" class="form-input" type="date" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="content">Description</label>
+          <textarea id="content" name="content" class="form-input" rows="8" placeholder="enter description here..."required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">Technologies</label>
+            <div class="technologies-form">
+              <label><input type="checkbox" name="nodejs" value="NodeJs">  Node JS</label>
+              <label><input type="checkbox" name="reactjs" value="ReactJs">  React JS</label>
+            </div>
+
+            <div class="technologies-form">
+              <label><input type="checkbox" name="nextjs" value="NextJs">  Next JS</label>
+              <label><input type="checkbox" name="typescript" value="Typescript">  TypeScript</label>
+            </div>
+        </div>
+
+        <div class="form-field">
+          <label for="image" class="form-label">Upload Image</label>
+          <img src="{{data.image}}" id="preview" style="width:40%;" class="d-none">
+              <div class="form-input">
+                <input id="image" style="font-size:smaller; width:100%;" name="image"  type="file" placeholder="title"  />
+              </div>
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Post Blog</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<script src="/assets/js/image-preview.js"></script>
+
+{{/layout}}

@@ -1,0 +1,54 @@
+{{#> layout title='Login' }}
+{{#if messages.success}}
+<script>
+Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "{{ messages.success }}",
+  showConfirmButton: false,
+  timer: 1500
+});
+</script>
+{{/if}}
+
+<main>
+  <section class="blog-form">
+    <form action="/login" method="post" class="form-container">
+      <h1 class="section-title" style="color: white;">Login</h1>
+
+    <div class="auth-form">
+      <div class="form-field">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" name="email" class="form-input" type="email" placeholder="example@mail.com" required />
+      </div>
+      <div class="form-field">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" name="password" class="form-input" type="password" placeholder="password (6 character)"
+          required />
+          <p style="color:white;">
+            Belum memiliki akun? <a href="/register">Daftar</a> disini
+          </p>
+      </div>
+
+      {{#if messages.error}}
+      <div class="alert alert-danger" role="alert">
+        {{messages.error}}
+      </div>
+      {{/if}}
+      {{#if messages.success}}
+      <div class="alert alert-success" role="alert">
+        {{messages.success}}
+      </div>
+      {{/if}}
+      <div class="login-button">
+        <button type="submit" class="btn btn-outline-dark">Login</button>
+      </div>
+    </div>
+    </form>
+  </section>
+</main>
+
+{{!--
+<script src="assets/js/blog.js"></script> --}}
+
+{{/layout}}

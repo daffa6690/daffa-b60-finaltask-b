@@ -1,0 +1,91 @@
+{{#> layout title='App' user=user }}
+
+{{#if messages.success}}
+<script>
+Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "{{ messages.success }}",
+  showConfirmButton: false,
+  timer: 1500
+});
+</script>
+{{/if}}
+
+<main>
+    <section class="blog-container">
+        <div style="position: relative; width: 80%; margin-bottom: 20px;">
+            <h1 class="section-title" style="color: rgb(0, 0, 0);">My Project</h1>
+            
+            {{#if user}}
+            <div class="d-grid gap-2 d-md-block">
+                <a class="btn btn-primary" href="/add-provinsi">Add Provinsi</a>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="container d-flex flex-wrap gap-3 justify-content-center my-4">
+            {{#each provinsi}}
+            <div class="card ggwp" style="width: 18rem">
+                <img src="{{this.photo}}" class="card-img-top" alt="image provinsi" style="border-radius:15px;" />
+                <div class="card-body" style="color:black;">
+                    <h5 class="card-title">
+                        <a href="/blog-detail/{{this.id}}" class="blog-item-title" style="color:black;">{{this.nama}}</a>
+                    </h5>
+                    <p class="card-text">{{ this.diresmikan }}</p>
+                    <p class="card-text">{{ this.content }}</p>
+                    
+                    <!-- Debugging Data -->
+                    <p style="font-size: 12px; color: gray;">User ID: {{../user.id}} | Post Owner: {{this.user_id}}</p>
+                    
+                    {{#if (eq ../user.id this.user_id)}}
+                    <div class="d-flex justify-content-end gap-2 w-100">
+                        <a href="/edit-provinsi/{{this.id}}" class="btn btn-success w-100">Edit</a>
+                        <form action="/blog-delete/{{this.id}}?_method=DELETE" method="post">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+</main>
+
+<script>
+    function submitForm(id, event) {
+        event.preventDefault();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/blog-delete/' + id + '?_method=DELETE', {
+                    method: 'POST'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        console.error('Failed to delete blog');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    }
+</script>
+
+{{/layout}}

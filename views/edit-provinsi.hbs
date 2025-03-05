@@ -1,0 +1,80 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <title>Edit Provinsi</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Edit Profil</h2>
+        <div class="d-flex align-items-center">
+          {{#if user}}
+            <span class="me-3">Welcome,
+              <strong>{{user.username}}</strong>!</span>
+            <a href="/logout" class="btn btn-danger me-2">Logout</a>
+          {{else}}
+            <a href="/login" class="btn btn-primary me-2">Login</a>
+          {{/if}}
+          <a href="/" class="btn btn-secondary">Kembali</a>
+        </div>
+      </div>
+
+      <div class="card shadow-sm p-4">
+        <form
+          action="/edit-provinsi/{{editProvinsi.id}}?_method=PATCH"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="nama" class="form-label">Nama Provinsi</label>
+            <input
+              type="text"
+              id="nama"
+              name="nama"
+              class="form-control"
+              value="{{editProvinsi.nama}}"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="diresmikan" class="form-label">Diresmikan</label>
+            <input
+              type="date"
+              id="diresmikan"
+              name="diresmikan"
+              class="form-control"
+              value="{{editTime editProvinsi.diresmikan}}"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Foto Provinsi</label>
+            <input type="file" id="image" name="image" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label for="pulau" class="form-label">Wilayah</label>
+            <select id="pulau" name="pulau" class="form-select" required>
+              <option
+                value="{{editProvinsi.pulau}}"
+                selected
+              >{{editProvinsi.pulau}}</option>
+              <option value="Jawa">Jawa</option>
+              <option value="Sumatera">Sumatera</option>
+              <option value="Kalimantan">Kalimantan</option>
+              <option value="Sulawesi">Sulawesi</option>
+              <option value="Papua">Papua</option>
+              <option value="Kepulauan Nusa Tenggara">Kepulauan Nusa Tenggara</option>
+              <option value="Kepulauan Maluku">Kepulauan Maluku</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
